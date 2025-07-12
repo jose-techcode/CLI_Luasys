@@ -14,7 +14,7 @@ import (
 // Raiz do comando
 
 var rootCmd = &cobra.Command{
-	Use: "luatop",
+	Use: "luasys",
 	Short: "Uma CLI tool de monitoramento e diagnóstico de recursos do hardware.",
 	Run: func(cmd *cobra.Command, args []string) {
 
