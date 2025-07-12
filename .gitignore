@@ -1,3 +1,26 @@
 # Binário
 
-luatop
+luasys
+*.exe
+*.out
+
+# Configurações de IDEs/Editores
+
+.vscode/
+.idea/
+*.swp
+
+# Arquivos de sistema
+
+.DS_Store
+Thumbs.db
+
+# Arquivos ocultos de backup
+
+*~
+
+# Outros
+
+*.log
+*.bak
+*.tmp
