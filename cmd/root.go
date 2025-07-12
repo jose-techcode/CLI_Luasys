@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
@@ -47,20 +46,6 @@ var rootCmd = &cobra.Command{
 
 		if len(cpu_info) > 0 {
 			fmt.Println("CPU Logical Core:", cpu_counts)
-		} else {
-			fmt.Println("Nothing found...")
-		}
-
-		// CPU (percent)
-
-		cpu_percent, err := cpu.Percent(time.Second, false)
-		if err != nil {
-			fmt.Println("Error retrieving information about CPU.", err)
-			return
-		}
-
-		if len(cpu_info) > 0 {
-			fmt.Printf("CPU Used Percent: %.2f%%\n", cpu_percent[0])
 			fmt.Println("-----RAM-----")
 		} else {
 			fmt.Println("Nothing found...")
