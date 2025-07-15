@@ -10,11 +10,11 @@ import (
 // Raiz do comando
 
 var processCmd = &cobra.Command{
-	Use: "process",
+	Use: "processes",
 	Short: "Exibe informações de processos.",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("-----PROCESSES-----")
+		fmt.Println("-----PROCESSESES-----")
 
 		// Process
 
