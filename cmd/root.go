@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"os/exec"
+	"strings"
 
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
@@ -15,7 +17,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use: "luasys",
-	Short: "Uma CLI tool de monitoramento e diagnóstico de recursos do hardware.",
+	Short: "Uma CLI tool de auditoria, diagnóstico e monitoramento de recursos do hardware.",
 	Run: func(cmd *cobra.Command, args []string) {
 
         fmt.Println("-----CPU-----")
@@ -46,12 +48,116 @@ var rootCmd = &cobra.Command{
 
 		if len(cpu_info) > 0 {
 			fmt.Println("CPU Logical Core:", cpu_counts)
-			fmt.Println("-----RAM-----")
+			fmt.Println("-----GPU-----")
 		} else {
 			fmt.Println("Nothing found...")
 		}
 
-		// RAM
+		// GPU
+
+		gpu_info, err := exec.Command("lspci").Output()
+		if err != nil {
+			fmt.Println("Error retrieving information about GPU.", err)
+			return
+		}
+
+		text := string(gpu_info)
+
+		lines := strings.Split(text, "\n")
+
+		// Percorrer uma lista para encontrar a linha da GPU
+
+		for _, line := range lines {
+			if strings.Contains(line, "VGA compatible controller") {
+				parts := strings.SplitN(line, ":", 2)
+				if len(parts) == 2 {
+					model := strings.TrimSpace(parts[1])
+					fmt.Println("GPU Model:", model)
+					fmt.Println("-----MOTHERBOARD-----")
+					break
+				}
+			}
+		}
+
+		// Motherboard
+
+		motherboard_info, err := exec.Command("dmidecode", "-t", "2").Output()
+		if err != nil {
+			fmt.Println("Error retrieving information about motherboard. Need sudo.", err)
+			return
+		}
+
+	    info_text := string(motherboard_info)
+
+		info_lines := strings.Split(info_text, "\n")
+
+		// Percorrer uma lista para encontrar o manufacturer
+
+        for _, info_line := range info_lines {
+			if strings.Contains(info_line, "Manufacturer") {
+				parts := strings.SplitN(info_line, ":", 2)
+				if len(parts) == 2 {
+					manufacturer := strings.TrimSpace(parts[1])
+					fmt.Println("Motherboard Manufacturer:", manufacturer)
+					break
+				}
+			}
+		}
+
+		// Percorer uma lista para encontrar a linha da placa-mãe e tirar a redundãncia "Product Name"
+
+		for _, info_line := range info_lines {
+			if strings.Contains(info_line, "Product Name") {
+				parts := strings.SplitN(info_line, ":", 2)
+				if len(parts) == 2 {
+					model := strings.TrimSpace(parts[1])
+					fmt.Println("Motherboard model:", model)
+					fmt.Println("-----BIOS-----")
+					break
+				}
+			}
+		}
+
+		// BIOS
+
+		bios_info, err := exec.Command("dmidecode", "-t", "bios").Output()
+		if err != nil {
+			fmt.Println("Error retrieving information about GPU.", err)
+			return
+		}
+
+		info_list := string(bios_info)
+
+		info_strings := strings.Split(info_list, "\n")
+
+		// Percorer uma lista para encontrar o vendor
+
+		for _, info_string := range info_strings {
+			if strings.Contains(info_string, "Vendor") {
+				parts := strings.SplitN(info_string, ":", 2)
+				if len(parts) == 2 {
+					vendor := strings.TrimSpace(parts[1])
+					fmt.Println("BIOS Vendor:", vendor)
+					break
+				}
+			}
+		}
+
+        // Percorer uma lista para encontrar a versão
+
+		for _, info_string := range info_strings {
+			if strings.Contains(info_string, "Version") {
+				parts := strings.SplitN(info_string, ":", 2)
+				if len(parts) == 2 {
+					version := strings.TrimSpace(parts[1])
+					fmt.Println("BIOS Version:", version)
+					fmt.Println("-----RAM-----")
+					break
+				}
+			}
+		}
+
+		// Memory (RAM)
 
 		mem_ram_info, err := mem.VirtualMemory()
 		if err != nil {
@@ -67,9 +173,9 @@ var rootCmd = &cobra.Command{
 		fmt.Printf("Free RAM: %.2f GB\n", available_ram_GB)
 		fmt.Printf("Used RAM: %.2f GB\n", used_ram_GB)
 		fmt.Printf("Used Percent RAM: %.2f%%\n", mem_ram_info.UsedPercent)
-		fmt.Println("-----Swap-----")
+		fmt.Println("-----SWAP-----")
 		
-        // Swap
+        // Memory (Swap)
 
 		mem_swap_info, err := mem.SwapMemory()
 		if err != nil {
@@ -85,7 +191,7 @@ var rootCmd = &cobra.Command{
 		fmt.Printf("Free Swap: %.2f GB\n", available_swap_GB)
 		fmt.Printf("Used Swap: %.2f GB\n", used_swap_GB)
 		fmt.Printf("Used Percent Swap: %.2f%%\n", mem_swap_info.UsedPercent)
-		fmt.Println("-----Disk-----")
+		fmt.Println("-----DISK-----")
 
 		// Disk
 
@@ -103,9 +209,9 @@ var rootCmd = &cobra.Command{
 		fmt.Printf("Free Disk: %.2f GB\n", available_disk_GB)
 		fmt.Printf("Used Disk: %.2f GB\n", used_disk_GB)
 		fmt.Printf("Used Percent Disk: %.2f%%\n", disk_info.UsedPercent)
-		fmt.Println("-----Partitions-----")
+		fmt.Println("-----PARTITIONS-----")
 
-		// Disk (partitions)
+		// Disk (Partitions)
 
 		disk_partitions_info, err := disk.Partitions(false)
 		if err != nil {
@@ -114,9 +220,17 @@ var rootCmd = &cobra.Command{
 		}
 
 		for _, dp := range disk_partitions_info {
-			fmt.Printf("Device: %s  Mounted on: %s  Fstype: %s\n", dp.Device, dp.Mountpoint, dp.Fstype)
+			fmt.Printf("Device: %s  Mounted on: %s\n", dp.Device, dp.Mountpoint)
 		}
-		fmt.Println("-----Kernel-----")
+		fmt.Println("-----KERNEL-----")
+
+		// Battery
+
+		// Temperature
+
+		// Fans
+
+		// Usb
 
 		// Host (Kernel & Operating System)
 				
@@ -131,7 +245,7 @@ var rootCmd = &cobra.Command{
 		fmt.Println("Kernel:", host_info.OS)
 	    fmt.Println("Kernel Version:", host_info.KernelVersion)
 		fmt.Println("Kernel Architecture:", host_info.KernelArch)
-		fmt.Println("-----Operating System-----")
+		fmt.Println("-----OPERATING SYSTEM-----")
         
 		// Operating System
 
