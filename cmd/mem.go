@@ -33,7 +33,7 @@ var memCmd = &cobra.Command{
 		fmt.Printf("Free RAM: %.2f GB\n", available_ram_GB)
 		fmt.Printf("Used RAM: %.2f GB\n", used_ram_GB)
 		fmt.Printf("Used Percent RAM: %.2f%%\n", ram_info.UsedPercent)
-		fmt.Println("-----Swap-----")
+		fmt.Println("-----SWAP-----")
 
 		// Swap
 

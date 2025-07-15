@@ -14,7 +14,7 @@ var netCmd = &cobra.Command{
 	Short: "Exibe informações da rede.",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("-----Input/Output-----")
+		fmt.Println("-----INPUT/OUTPUT-----")
 
         // Net (IOCounters)
 

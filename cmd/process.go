@@ -14,7 +14,7 @@ var processCmd = &cobra.Command{
 	Short: "Exibe informações de processos.",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("-----Processes-----")
+		fmt.Println("-----PROCESSES-----")
 
 		// Process
 

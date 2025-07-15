@@ -14,7 +14,7 @@ var diskCmd = &cobra.Command{
 	Short: "Exibe informações do disco.",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("-----Disk-----")
+		fmt.Println("-----DISK-----")
 
         // Disk
 
@@ -32,7 +32,7 @@ var diskCmd = &cobra.Command{
 		fmt.Printf("Free Disk: %.2f GB\n", available_disk_GB)
 		fmt.Printf("Used Disk: %.2f GB\n", used_disk_GB)
 		fmt.Printf("Used Percent Disk: %.2f%%\n", disk_info.UsedPercent)
-		fmt.Println("-----Partitions-----")
+		fmt.Println("-----PARTITIONS-----")
 
 		// Disk (partitions)
 

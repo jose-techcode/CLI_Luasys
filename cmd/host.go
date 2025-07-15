@@ -14,7 +14,7 @@ var hostCmd = &cobra.Command{
 	Short: "Exibe informações do kernel e do sistema operacional.",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("-----Kernel-----")
+		fmt.Println("-----KERNEL-----")
 
 		// Host (Kernel & Operating System)
 				
@@ -29,7 +29,7 @@ var hostCmd = &cobra.Command{
 		fmt.Println("Kernel:", host_info.OS)
 	    fmt.Println("Kernel Version:", host_info.KernelVersion)
 		fmt.Println("Kernel Architecture:", host_info.KernelArch)
-		fmt.Println("-----Operating System-----")
+		fmt.Println("-----OPERATING SYSTEM-----")
         
 		// Operating System
 
