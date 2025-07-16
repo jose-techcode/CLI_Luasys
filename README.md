@@ -4,19 +4,19 @@ A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de rec
 
 # 2. Funcionalidades
 
-luasys - Exibe informações gerais, com exceção de net e process.
-cpu - Exibe informações da CPU.
-gpu - Exibe informações da GPU.
-motherboard - Exibe informações da placa-mãe.
-bios - Exibe informações da BIOS.
-mem - Exibe informações da memória.
-disk - Exibe informações do disco.
-battery - Exibe informações da bateria.
-temp - Exibe informações da temperatura.
-usb - Exibe informações de dispositivos USB.
-host - Exibe informações do kernel e do sistema operacional.
-net - Exibe informações da rede.
-processes - Exibe informações de processos.
+- luasys - Exibe informações gerais, com exceção de net e process.
+- cpu - Exibe informações da CPU.
+- gpu - Exibe informações da GPU.
+- motherboard - Exibe informações da placa-mãe.
+- bios - Exibe informações da BIOS.
+- mem - Exibe informações da memória.
+- disk - Exibe informações do disco.
+- battery - Exibe informações da bateria.
+- temp - Exibe informações da temperatura.
+- usb - Exibe informações de dispositivos USB.
+- host - Exibe informações do kernel e do sistema operacional.
+- net - Exibe informações da rede.
+- processes - Exibe informações de processos.
 
 # 3. Tecnologias
 
