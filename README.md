@@ -1,6 +1,6 @@
 # 1. CLI Luasys
 
-A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de recursos do hardware, como cpu, memória, placa-mãe, bios, memória, disco e partições, host (kernel e sistema operacional), net (rede) e processes (processos).
+A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de recursos do hardware, como cpu, memória, placa-mãe, bios, memória, disco e partições, bateria, temperatura, usb, host (kernel e sistema operacional), net (rede) e processes (processos).
 
 # 2. Funcionalidades
 
@@ -11,6 +11,9 @@ motherboard - Exibe informações da placa-mãe.
 bios - Exibe informações da BIOS.
 mem - Exibe informações da memória.
 disk - Exibe informações do disco.
+battery - Exibe informações da bateria.
+temp - Exibe informações da temperatura.
+usb - Exibe informações de dispositivos USB.
 host - Exibe informações do kernel e do sistema operacional.
 net - Exibe informações da rede.
 processes - Exibe informações de processos.
@@ -21,7 +24,7 @@ processes - Exibe informações de processos.
 - Bibliotecas: Cobra e Gopsutil
 - Ambiente: Linux
 - Versionamento de código: Git
-- Outros: dmidecode e lspci
+- Outros: dmidecode, lspci, acpi, sensors e lsusb
 
 # 4. Clone do Repositório
 
