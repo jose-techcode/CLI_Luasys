@@ -313,7 +313,7 @@ func Runsys() string {
 
 var rootCmd = &cobra.Command{
 	Use: "luasys",
-	Short: "Uma CLI tool de auditoria, diagnóstico e monitoramento de recursos do hardware.",
+	Short: "Uma CLI tool de auditoria, diagnóstico e monitoramento de recursos do hardware. Administrator/Sudo.",
 	Run: func(cmd *cobra.Command, args []string) {
 		info := Runsys()
 		fmt.Println(info)
