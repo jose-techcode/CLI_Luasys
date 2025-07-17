@@ -4,14 +4,14 @@ import (
     "net/http"
 
     "github.com/labstack/echo/v4"
-    "github.com/jose-techcode/CLI_Luasys/cmd"
+    "github.com/jose-techcode/CLI_Luasys/sysinfo"
 )
 
 func Server() {
     e := echo.New()
 
     e.GET("/", func(c echo.Context) error {
-        informations := cmd.Runsys()
+        informations := sysinfo.Runsys()
         return c.String(http.StatusOK, informations)
     })
 
