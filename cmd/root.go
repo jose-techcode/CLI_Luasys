@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"os/exec"
@@ -13,340 +14,309 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Função exportável
+
+func Runsys() string {
+	var out bytes.Buffer
+
+	out.WriteString("-----CPU-----\n")
+
+	// CPU (info)
+
+	cpu_info, err := cpu.Info()
+	if err != nil {
+		out.WriteString("Error retrieving information about CPU: " + err.Error() + "\n")
+		return out.String()
+	}
+
+	if len(cpu_info) > 0 {
+		out.WriteString(fmt.Sprintf("CPU Model: %v\n", cpu_info[0].ModelName))
+		out.WriteString(fmt.Sprintf("CPU Manufacturer: %v\n", cpu_info[0].VendorID))
+		out.WriteString(fmt.Sprintf("CPU Physical Core: %v\n", cpu_info[0].Cores))
+	} else {
+		out.WriteString("Nothing found...\n")
+	}
+
+	// CPU (counts)
+
+	cpu_counts, err := cpu.Counts(false)
+	if err != nil {
+		out.WriteString("Error retrieving information about CPU.\n")
+		return out.String()
+	}
+
+	if len(cpu_info) > 0 {
+		out.WriteString(fmt.Sprintf("CPU Logical Core: %v\n", cpu_counts))
+	} else {
+		out.WriteString("Nothing found...\n")
+	}
+
+	out.WriteString("\n-----GPU-----\n")
+
+	// GPU
+
+	gpu_info, err := exec.Command("lspci").Output()
+	if err != nil {
+		out.WriteString("Error retrieving information about GPU: " + err.Error() + "\n")
+		return out.String()
+	}
+	for _, line := range strings.Split(string(gpu_info), "\n") {
+		if strings.Contains(line, "VGA compatible controller") {
+			parts := strings.SplitN(line, ":", 2)
+			if len(parts) == 2 {
+				model := strings.TrimSpace(parts[1])
+				out.WriteString(fmt.Sprintf("GPU Model: %s\n", model))
+				break
+			}
+		}
+	}
+
+	out.WriteString("\n-----MOTHERBOARD-----\n")
+
+	// Motherboard
+
+	motherboard_info, err := exec.Command("dmidecode", "-t", "2").Output()
+	if err != nil {
+		out.WriteString("Error retrieving information about Motherboard: " + err.Error() + "\n")
+		return out.String()
+	}
+	info_lines := strings.Split(string(motherboard_info), "\n")
+	for _, line := range info_lines {
+		if strings.Contains(line, "Manufacturer") {
+			parts := strings.SplitN(line, ":", 2)
+			if len(parts) == 2 {
+				manufacturer := strings.TrimSpace(parts[1])
+				out.WriteString(fmt.Sprintf("Motherboard Manufacturer: %s\n", manufacturer))
+				break
+			}
+		}
+	}
+	for _, line := range info_lines {
+		if strings.Contains(line, "Product Name") {
+			parts := strings.SplitN(line, ":", 2)
+			if len(parts) == 2 {
+				model := strings.TrimSpace(parts[1])
+				out.WriteString(fmt.Sprintf("Motherboard model: %s\n", model))
+				break
+			}
+		}
+	}
+
+	out.WriteString("\n-----BIOS-----\n")
+
+	// BIOS
+
+	bios_info, err := exec.Command("dmidecode", "-t", "bios").Output()
+	if err != nil {
+		out.WriteString("Error retrieving information about BIOS: " + err.Error() + "\n")
+		return out.String()
+	}
+	for _, line := range strings.Split(string(bios_info), "\n") {
+		if strings.Contains(line, "Vendor") {
+			parts := strings.SplitN(line, ":", 2)
+			if len(parts) == 2 {
+				vendor := strings.TrimSpace(parts[1])
+				out.WriteString(fmt.Sprintf("BIOS Vendor: %s\n", vendor))
+				break
+			}
+		}
+	}
+	for _, line := range strings.Split(string(bios_info), "\n") {
+		if strings.Contains(line, "Version") {
+			parts := strings.SplitN(line, ":", 2)
+			if len(parts) == 2 {
+				version := strings.TrimSpace(parts[1])
+				out.WriteString(fmt.Sprintf("BIOS Version: %s\n", version))
+				break
+			}
+		}
+	}
+
+	out.WriteString("\n-----RAM-----\n")
+
+	// Memory (RAM)
+
+	ram_info, err := mem.VirtualMemory()
+	if err != nil {
+		out.WriteString("Error retrieving information about RAM: " + err.Error() + "\n")
+		return out.String()
+	}
+	out.WriteString(fmt.Sprintf("Total RAM: %.2f GB\n", float64(ram_info.Total)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Free RAM: %.2f GB\n", float64(ram_info.Available)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Used RAM: %.2f GB\n", float64(ram_info.Used)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Used Percent RAM: %.2f%%\n", ram_info.UsedPercent))
+
+	out.WriteString("\n-----SWAP-----\n")
+
+	// Memory (Swap)
+
+	swap_info, err := mem.SwapMemory()
+	if err != nil {
+		out.WriteString("Error retrieving information about swap: " + err.Error() + "\n")
+		return out.String()
+	}
+	out.WriteString(fmt.Sprintf("Total Swap: %.2f GB\n", float64(swap_info.Total)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Free Swap: %.2f GB\n", float64(swap_info.Free)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Used Swap: %.2f GB\n", float64(swap_info.Used)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Used Percent Swap: %.2f%%\n", swap_info.UsedPercent))
+
+    // Disk
+
+	out.WriteString("\n-----DISK-----\n")
+
+	disk_info, err := disk.Usage("/")
+	if err != nil {
+		out.WriteString("Error retrieving information about Disk: " + err.Error() + "\n")
+		return out.String()
+	}
+	out.WriteString(fmt.Sprintf("Total Disk: %.2f GB\n", float64(disk_info.Total)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Free Disk: %.2f GB\n", float64(disk_info.Free)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Used Disk: %.2f GB\n", float64(disk_info.Used)/(1024*1024*1024)))
+	out.WriteString(fmt.Sprintf("Used Percent Disk: %.2f%%\n", disk_info.UsedPercent))
+
+	out.WriteString("\n-----PARTITIONS-----\n")
+
+	// Disk (Partitions)
+
+	partitions, err := disk.Partitions(false)
+	if err != nil {
+		out.WriteString("Error retrieving information about partitions: " + err.Error() + "\n")
+		return out.String()
+	}
+	for _, part := range partitions {
+		out.WriteString(fmt.Sprintf("Device: %s  Mounted on: %s\n", part.Device, part.Mountpoint))
+	}
+
+	out.WriteString("\n-----BATTERY-----\n")
+
+	// Battery
+
+	battery_info, err := exec.Command("acpi").Output()
+	if err != nil {
+		out.WriteString("Error retrieving information about battery: " + err.Error() + "\n")
+		return out.String()
+	}
+	out.WriteString(string(battery_info))
+
+	out.WriteString("\n-----TEMPERATURE-----\n")
+
+    // Temperature
+
+	temperature_info, err := exec.Command("sensors").Output()
+	if err != nil {
+		out.WriteString("Error retrieving information about temperature: " + err.Error() + "\n")
+		return out.String()
+	}
+	
+	// Percorer uma lista para encontrar a temperatura geral da CPU
+
+    cpu_text := string(temperature_info)
+
+	cpu_lines := strings.Split(cpu_text, "\n")
+
+	for _, cpu_line := range cpu_lines {
+			if strings.Contains(cpu_line, "Package id 0") {
+				parts := strings.SplitN(cpu_line, ":", 2)
+				if len(parts) == 2 {
+					cpu := strings.TrimSpace(parts[1])
+					out.WriteString((fmt.Sprintf("CPU Temperature: %s\n", cpu)))
+					break
+				}
+			}
+		}
+
+	// Percorer uma lista para encontrar a temperatura do core 0
+
+	core0_text := string(temperature_info)
+
+	core0_lines := strings.Split(core0_text, "\n")
+
+	for _, core0_line := range core0_lines {
+			if strings.Contains(core0_line, "Core 0") {
+				parts := strings.SplitN(core0_line, ":", 2)
+				if len(parts) == 2 {
+					core0 := strings.TrimSpace(parts[1])
+					out.WriteString(fmt.Sprintf("Core 0: %s\n", core0))
+					break
+				}
+			}
+		}
+
+    // Percorer uma lista para encontrar a temperatura do core 1
+
+	core1_text := string(temperature_info)
+
+	core1_lines := strings.Split(core1_text, "\n")
+
+	for _, core1_line := range core1_lines {
+			if strings.Contains(core1_line, "Core 0") {
+				parts := strings.SplitN(core1_line, ":", 2)
+				if len(parts) == 2 {
+					core1 := strings.TrimSpace(parts[1])
+					out.WriteString(fmt.Sprintf("Core 1: %s\n", core1))
+					break
+				}
+			}
+		}
+
+	// Percorer uma lista para encontrar a temperatura da placa-mãe
+
+	temp1_text := string(temperature_info)
+
+	temp1_lines := strings.Split(temp1_text, "\n")
+
+	for _, temp1_line := range temp1_lines {
+			if strings.Contains(temp1_line, "temp1") {
+				parts := strings.SplitN(temp1_line, ":", 2)
+				if len(parts) == 2 {
+					temp1 := strings.TrimSpace(parts[1])
+					out.WriteString(fmt.Sprintf("Motherboard Temperature: %s\n", temp1))
+					break
+				}
+			}
+		}
+
+	out.WriteString("\n-----USB-----\n")
+
+	// USB
+
+	usb_info, err := exec.Command("lsusb").Output()
+	if err != nil {
+		out.WriteString("Error retrieving information about USB: " + err.Error() + "\n")
+		return out.String()
+	}
+	out.WriteString(string(usb_info))
+
+	out.WriteString("\n-----KERNEL-----\n")
+
+	// Host (Kernel & Operating System)
+
+	host_info, err := host.Info()
+	if err != nil {
+		out.WriteString("Error retrieving information about kernel and OS: " + err.Error() + "\n")
+		return out.String()
+	}
+	out.WriteString(fmt.Sprintf("Kernel: %s\n", host_info.OS))
+	out.WriteString(fmt.Sprintf("Kernel Version: %s\n", host_info.KernelVersion))
+	out.WriteString(fmt.Sprintf("Kernel Architecture: %s\n", host_info.KernelArch))
+
+    out.WriteString("\n-----OPERATING SYSTEM-----\n")
+
+	out.WriteString(fmt.Sprintf("Hostname: %s\n", host_info.Hostname))
+	out.WriteString(fmt.Sprintf("Platform: %s\n", host_info.Platform))
+	out.WriteString(fmt.Sprintf("Uptime (minutes): %d", host_info.Uptime/60))
+
+	return out.String()
+}
+
 // Raiz do comando
 
 var rootCmd = &cobra.Command{
 	Use: "luasys",
 	Short: "Uma CLI tool de auditoria, diagnóstico e monitoramento de recursos do hardware.",
 	Run: func(cmd *cobra.Command, args []string) {
-
-        fmt.Println("-----CPU-----")
-
-		// CPU (info)
-
-		cpu_info, err := cpu.Info()
-		if err != nil {
-			fmt.Println("Error retrieving information about CPU.", err)
-			return
-		}
-
-		if len(cpu_info) > 0 {
-			fmt.Println("CPU Model:", cpu_info[0].ModelName)
-			fmt.Println("CPU Manufacturer:", cpu_info[0].VendorID)
-			fmt.Println("CPU Physical Core:", cpu_info[0].Cores)
-		} else {
-			fmt.Println("Nothing found...")
-		}
-		
-		// CPU (counts)
-
-		cpu_counts, err := cpu.Counts(false)
-		if err != nil {
-			fmt.Println("Error retrieving information about CPU.", err)
-			return
-		}
-
-		if len(cpu_info) > 0 {
-			fmt.Println("CPU Logical Core:", cpu_counts)
-			fmt.Println("-----GPU-----")
-		} else {
-			fmt.Println("Nothing found...")
-		}
-
-		// GPU
-
-		gpu_info, err := exec.Command("lspci").Output()
-		if err != nil {
-			fmt.Println("Error retrieving information about GPU.", err)
-			return
-		}
-
-		text := string(gpu_info)
-
-		lines := strings.Split(text, "\n")
-
-		// Percorrer uma lista para encontrar a linha da GPU
-
-		for _, line := range lines {
-			if strings.Contains(line, "VGA compatible controller") {
-				parts := strings.SplitN(line, ":", 2)
-				if len(parts) == 2 {
-					model := strings.TrimSpace(parts[1])
-					fmt.Println("GPU Model:", model)
-					fmt.Println("-----MOTHERBOARD-----")
-					break
-				}
-			}
-		}
-
-		// Motherboard
-
-		motherboard_info, err := exec.Command("dmidecode", "-t", "2").Output()
-		if err != nil {
-			fmt.Println("Error retrieving information about motherboard. Need sudo.", err)
-			return
-		}
-
-	    info_text := string(motherboard_info)
-
-		info_lines := strings.Split(info_text, "\n")
-
-		// Percorrer uma lista para encontrar o manufacturer
-
-        for _, info_line := range info_lines {
-			if strings.Contains(info_line, "Manufacturer") {
-				parts := strings.SplitN(info_line, ":", 2)
-				if len(parts) == 2 {
-					manufacturer := strings.TrimSpace(parts[1])
-					fmt.Println("Motherboard Manufacturer:", manufacturer)
-					break
-				}
-			}
-		}
-
-		// Percorer uma lista para encontrar a linha da placa-mãe e tirar a redundãncia "Product Name"
-
-		for _, info_line := range info_lines {
-			if strings.Contains(info_line, "Product Name") {
-				parts := strings.SplitN(info_line, ":", 2)
-				if len(parts) == 2 {
-					model := strings.TrimSpace(parts[1])
-					fmt.Println("Motherboard model:", model)
-					fmt.Println("-----BIOS-----")
-					break
-				}
-			}
-		}
-
-		// BIOS
-
-		bios_info, err := exec.Command("dmidecode", "-t", "bios").Output()
-		if err != nil {
-			fmt.Println("Error retrieving information about GPU.", err)
-			return
-		}
-
-		info_list := string(bios_info)
-
-		info_strings := strings.Split(info_list, "\n")
-
-		// Percorer uma lista para encontrar o vendor
-
-		for _, info_string := range info_strings {
-			if strings.Contains(info_string, "Vendor") {
-				parts := strings.SplitN(info_string, ":", 2)
-				if len(parts) == 2 {
-					vendor := strings.TrimSpace(parts[1])
-					fmt.Println("BIOS Vendor:", vendor)
-					break
-				}
-			}
-		}
-
-        // Percorer uma lista para encontrar a versão
-
-		for _, info_string := range info_strings {
-			if strings.Contains(info_string, "Version") {
-				parts := strings.SplitN(info_string, ":", 2)
-				if len(parts) == 2 {
-					version := strings.TrimSpace(parts[1])
-					fmt.Println("BIOS Version:", version)
-					fmt.Println("-----RAM-----")
-					break
-				}
-			}
-		}
-
-		// Memory (RAM)
-
-		mem_ram_info, err := mem.VirtualMemory()
-		if err != nil {
-			fmt.Println("Error retrieving information about RAM.", err)
-			return
-		}
-	    
-		total_ram_GB := float64(mem_ram_info.Total) / (1024 * 1024 * 1024)
-	    available_ram_GB := float64(mem_ram_info.Available) / (1024 * 1024 * 1024)
-		used_ram_GB := float64(mem_ram_info.Used) / (1024 * 1024 * 1024)
-		
-		fmt.Printf("Total RAM: %.2f GB\n", total_ram_GB)
-		fmt.Printf("Free RAM: %.2f GB\n", available_ram_GB)
-		fmt.Printf("Used RAM: %.2f GB\n", used_ram_GB)
-		fmt.Printf("Used Percent RAM: %.2f%%\n", mem_ram_info.UsedPercent)
-		fmt.Println("-----SWAP-----")
-		
-        // Memory (Swap)
-
-		mem_swap_info, err := mem.SwapMemory()
-		if err != nil {
-			fmt.Println("Error retrieving information about swap.", err)
-			return
-		}
-
-		total_swap_GB := float64(mem_swap_info.Total) / (1024 * 1024 * 1024)
-	    available_swap_GB := float64(mem_swap_info.Free) / (1024 * 1024 * 1024)
-		used_swap_GB := float64(mem_swap_info.Used) / (1024 * 1024 * 1024)
-
-		fmt.Printf("Total Swap: %.2f GB\n", total_swap_GB)
-		fmt.Printf("Free Swap: %.2f GB\n", available_swap_GB)
-		fmt.Printf("Used Swap: %.2f GB\n", used_swap_GB)
-		fmt.Printf("Used Percent Swap: %.2f%%\n", mem_swap_info.UsedPercent)
-		fmt.Println("-----DISK-----")
-
-		// Disk
-
-		disk_info, err := disk.Usage("/")
-		if err != nil {
-			fmt.Println("Error retrieving information about disk.", err)
-			return
-		}
-
-		total_disk_GB := float64(disk_info.Total) / (1024 * 1024 * 1024)
-	    available_disk_GB := float64(disk_info.Free) / (1024 * 1024 * 1024)
-		used_disk_GB := float64(disk_info.Used) / (1024 * 1024 * 1024)
-
-		fmt.Printf("Total Disk: %.2f GB\n", total_disk_GB)
-		fmt.Printf("Free Disk: %.2f GB\n", available_disk_GB)
-		fmt.Printf("Used Disk: %.2f GB\n", used_disk_GB)
-		fmt.Printf("Used Percent Disk: %.2f%%\n", disk_info.UsedPercent)
-		fmt.Println("-----PARTITIONS-----")
-
-		// Disk (Partitions)
-
-		disk_partitions_info, err := disk.Partitions(false)
-		if err != nil {
-			fmt.Println("Error retrieving information about partitions.", err)
-			return
-		}
-
-		for _, dp := range disk_partitions_info {
-			fmt.Printf("Device: %s  Mounted on: %s\n", dp.Device, dp.Mountpoint)
-		}
-		fmt.Println("-----BATTERY-----")
-
-		// Battery
-
-		battery_info, err := exec.Command("acpi").Output()
-		if err != nil {
-			fmt.Println("Error retrieving information about battery.", err)
-			return
-		}
-
-		battery_text := strings.TrimSpace(string(battery_info))
-
-		fmt.Println(battery_text)
-		fmt.Println("-----TEMPERATURE-----")
-
-		// Temperature
-
-		temperature_info, err := exec.Command("sensors").Output()
-		if err != nil {
-			fmt.Println("Error retrieving information about temperature.", err)
-			return
-		}
-
-		// Percorer uma lista para encontrar a temperatura geral da CPU
-
-        cpu_text := string(temperature_info)
-
-		cpu_lines := strings.Split(cpu_text, "\n")
-
-		for _, cpu_line := range cpu_lines {
-			if strings.Contains(cpu_line, "Package id 0") {
-				parts := strings.SplitN(cpu_line, ":", 2)
-				if len(parts) == 2 {
-					cpu := strings.TrimSpace(parts[1])
-					fmt.Println("CPU Temperature:", cpu)
-					break
-				}
-			}
-		}
-
-		// Percorer uma lista para encontrar a temperatura do core 0
-
-		core0_text := string(temperature_info)
-
-		core0_lines := strings.Split(core0_text, "\n")
-
-		for _, core0_line := range core0_lines {
-			if strings.Contains(core0_line, "Core 0") {
-				parts := strings.SplitN(core0_line, ":", 2)
-				if len(parts) == 2 {
-					core0 := strings.TrimSpace(parts[1])
-					fmt.Println("Core 0:", core0)
-					break
-				}
-			}
-		}
-
-        // Percorer uma lista para encontrar a temperatura do core 1
-
-		core1_text := string(temperature_info)
-
-		core1_lines := strings.Split(core1_text, "\n")
-
-		for _, core1_line := range core1_lines {
-			if strings.Contains(core1_line, "Core 0") {
-				parts := strings.SplitN(core1_line, ":", 2)
-				if len(parts) == 2 {
-					core1 := strings.TrimSpace(parts[1])
-					fmt.Println("Core 1:", core1)
-					break
-				}
-			}
-		}
-
-		// Percorer uma lista para encontrar a temperatura da placa-mãe
-
-		temp1_text := string(temperature_info)
-
-		temp1_lines := strings.Split(temp1_text, "\n")
-
-		for _, temp1_line := range temp1_lines {
-			if strings.Contains(temp1_line, "temp1") {
-				parts := strings.SplitN(temp1_line, ":", 2)
-				if len(parts) == 2 {
-					temp1 := strings.TrimSpace(parts[1])
-					fmt.Println("Motherboard Temperature:", temp1)
-					fmt.Println("-----USB-----")
-					break
-				}
-			}
-		}
-
-		// Usb
-
-		usb_info, err := exec.Command("lsusb").Output()
-		if err != nil {
-			fmt.Println("Error retrieving information about usb devices.", err)
-			return
-		}
-
-		usb_text := strings.TrimSpace(string(usb_info))
-
-		fmt.Println(usb_text)
-		fmt.Println("-----KERNEL-----")
-
-		// Host (Kernel & Operating System)
-				
-		host_info, err := host.Info()
-		if err != nil {
-			fmt.Println("Error retrieving information about Kernel and Operating System.", err)
-			return
-		}
-
-		// Kernel
-
-		fmt.Println("Kernel:", host_info.OS)
-	    fmt.Println("Kernel Version:", host_info.KernelVersion)
-		fmt.Println("Kernel Architecture:", host_info.KernelArch)
-		fmt.Println("-----OPERATING SYSTEM-----")
-        
-		// Operating System
-
-		fmt.Println("Hostname:", host_info.Hostname)
-		fmt.Println("Plataform:", host_info.Platform)
-		fmt.Println("Uptime (minutes):", host_info.Uptime / 60)
+		info := Runsys()
+		fmt.Println(info)
 	},
 }
 
