@@ -15,7 +15,7 @@ var usbCmd = &cobra.Command{
 
 		fmt.Println("-----USB-----")
 
-		// Usb
+		// USB
 
 		usb_info, err := exec.Command("lsusb").Output()
 		if err != nil {
