@@ -46,17 +46,29 @@ A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de rec
 - GET: Exibe informações da auditoria, diagnóstico e monitoramento via servidor HTTP por API.
 
 - / - Rota geral.
+
 - /cpu - Rota da CPU.
+
 - /gpu - Rota da GPU.
+
 - /motherboard - Rota da placa-mãe.
+
 - /bios - Rota da BIOS.
+
 - /mem - Rota da memória.
+
 - /disk - Rota do disco.
+
 - /battery - Rota da bateria.
+
 - /temperature - Rota da temperature.
-- /usb - Rota do USB.
+
+- /usb - Rota de dispositivos USB.
+
 - /host - Rota do kernel e do sistema operacional.
+
 - /net - Rota da rede.
+
 - /processes - Rota de processos.
 
 # 5. Clone do Repositório
