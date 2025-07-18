@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func GetbiosInfo() string {
+func GetBIOSInfo() string {
 	var out bytes.Buffer
 
 	out.WriteString("-----BIOS-----\n")
