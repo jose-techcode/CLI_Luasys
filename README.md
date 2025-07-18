@@ -1,5 +1,19 @@
 # Instalação
 
+Pacote .deb da ferramenta Luasys.
+
+Para instalar, baixe o arquivo .deb e rode:
+
+- sudo dpkg -i luasys.deb
+
+Depois, execute:
+
+- luasys --help
+
+Observação:
+
+Execute a CLI tool com permissão de administrador (sudo) para funcionar corretamente.
+
 # 2. CLI Luasys (admin/sudo)
 
 A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de recursos do hardware, como cpu, memória, placa-mãe, bios, memória, disco e partições, bateria, temperatura, usb, host (kernel e sistema operacional), net (rede) e processes (processos). Precisa de permissão de administrador ou sudo para executar a CLI Luasys. Ao clonar o repositório, você terá controle de uma API REST local.
@@ -92,7 +106,3 @@ Sinta-se livre para abrir Issues ou enviar Pull Requests.
 # 9. Licença
 
 Este projeto está licenciado sob a licença GPL.
-
-# 10. Observações
-
-Não disponível para instação via apt, nem via .deb. Documentação sujeita a mais atualizações, bem como a CLI Luasys.
