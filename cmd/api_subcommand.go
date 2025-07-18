@@ -11,7 +11,8 @@ import (
 
 var apiCmd = &cobra.Command{
 	Use: "api",
-	Short: "Inicia servidor HTTP da API.",
+	Short: "Inicia servidor HTTP da API. Localhost.",
+	Long: "Rotas: /cpu, /gpu, /motherboard, /bios, /mem, /disk, /battery, /temperature, /usb, /host, /net, /processes",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Iniciando servidor HTTP na porta 8000...")
 		api.Server()
