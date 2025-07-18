@@ -1,10 +1,12 @@
-# 1. CLI Luasys
+# 1. CLI Luasys (admin/sudo)
 
-A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de recursos do hardware, como cpu, memória, placa-mãe, bios, memória, disco e partições, bateria, temperatura, usb, host (kernel e sistema operacional), net (rede) e processes (processos).
+A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de recursos do hardware, como cpu, memória, placa-mãe, bios, memória, disco e partições, bateria, temperatura, usb, host (kernel e sistema operacional), net (rede) e processes (processos). Precisa de permissão de administrador ou sudo para executar a CLI Luasys.
 
 # 2. Funcionalidades
 
 - luasys - Exibe informações gerais, com exceção de net e process.
+
+- api - Inicia servidor HTTP da API.
 
 - cpu - Exibe informações da CPU.
 
@@ -33,31 +35,39 @@ A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de rec
 # 3. Tecnologias
 
 - Linguagem: Golang
-- Bibliotecas: Cobra e Gopsutil
+- Framework: Echo
+- Bibliotecas: Cobra
 - Ambiente: Linux
 - Versionamento de código: Git
 - Outros: dmidecode, lspci, acpi, sensors e lsusb
 
-# 4. Clone do Repositório
+# 4. API REST
+
+- GET: Exibe informações da auditoria, diagnóstico e monitoramento via servidor HTTP por API.
+- POST: Em breve...
+- PUT: Em breve...
+- DELETE: Em breve...
+
+# 5. Clone do Repositório
 
 - Bash
 
 git clone github.com/jose-techcode/CLI_Luasys
 
-# 5. Pasta do Projeto
+# 6. Pasta do Projeto
 
 - Bash
 
 cd CLI_Luasys
 
-# 6. Contribuição
+# 7. Contribuição
 
 Sinta-se livre para abrir Issues ou enviar Pull Requests.
 
-# 7. Licença
+# 8. Licença
 
 Este projeto está licenciado sob a licença GPL.
 
-# 8. Observações
+# 9. Observações
 
 Não disponível para instação via apt, nem via .deb. Documentação sujeita a mais atualizações, bem como a CLI Luasys.
