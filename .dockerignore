@@ -1,0 +1,35 @@
+# Configurações de IDEs/Editores
+
+.vscode/
+.idea/
+*.swp
+
+# Arquivos de sistema
+
+.DS_Store
+Thumbs.db
+
+# Arquivos ocultos de backup
+
+*~
+
+# Outros
+
+*.log
+*.bak
+*.tmp
+
+# Git
+
+.git/
+.gitignore
+
+# Arquivos Docker
+
+Dockerfile
+.dockerignore
+
+# Outros
+
+*.md
+LICENSE
