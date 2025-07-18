@@ -6,7 +6,7 @@ A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de rec
 
 - luasys - Exibe informações gerais, com exceção de net e process.
 
-- api - Inicia servidor HTTP da API.
+- api - Inicia servidor HTTP da API. Localhost.
 
 - cpu - Exibe informações da CPU.
 
