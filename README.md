@@ -99,10 +99,24 @@ git clone github.com/jose-techcode/CLI_Luasys
 
 cd CLI_Luasys
 
-# 8. Contribuição
+# 8. Rodar em Docker
+
+- Build da imagem
+
+docker build -t luasys:latest.
+
+- Rodar a imagem
+
+docker run --rm luasys:latest
+
+- Rodar a imagem com privilégio (recomendado)
+
+docker run --rm --privileged luasys:latest (opcional: < subcomando >)
+
+# 9. Contribuição
 
 Sinta-se livre para abrir Issues ou enviar Pull Requests.
 
-# 9. Licença
+# 10. Licença
 
 Este projeto está licenciado sob a licença GPL.
