@@ -38,7 +38,7 @@ var netCmd = &cobra.Command{
 		}
 
 		for _, tcp := range net_info_connections_tcp {
-			fmt.Printf("TCP Fd: %d  TCP Family: %d  TCP Type: %d  TCP Status: %s  TCP Uids: %d  TCP Pid: %d\n", tcp.Fd, tcp.Family, tcp.Type, tcp.Status, tcp.Uids, tcp.Pid)
+			fmt.Printf("TCP Fd: %d  TCP Family: %d  TCP Type: %d  TCP Status: %s  TCP Uids: %v  TCP Pid: %d\n", tcp.Fd, tcp.Family, tcp.Type, tcp.Status, tcp.Uids, tcp.Pid)
 		}
 		fmt.Println("-----UDP-----")
 
@@ -51,7 +51,7 @@ var netCmd = &cobra.Command{
 		}
 
 		for _, udp := range net_info_connections_udp {
-			fmt.Printf("UDP Fd: %d  UDP Family: %d  UDP Type: %d  UDP Uids: %d  UDP Pid: %d\n", udp.Fd, udp.Family, udp.Type, udp.Uids, udp.Pid)
+			fmt.Printf("UDP Fd: %d  UDP Family: %d  UDP Type: %d  UDP Uids: %v  UDP Pid: %d\n", udp.Fd, udp.Family, udp.Type, udp.Uids, udp.Pid)
 		}
 	},
 }
