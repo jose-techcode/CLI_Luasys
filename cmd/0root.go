@@ -160,9 +160,9 @@ func Runsys() string {
 	out.WriteString(fmt.Sprintf("Used Swap: %.2f GB\n", float64(swap_info.Used)/(1024*1024*1024)))
 	out.WriteString(fmt.Sprintf("Used Percent Swap: %.2f%%\n", swap_info.UsedPercent))
 
-    // Disk
-
 	out.WriteString("\n-----DISK-----\n")
+
+    // Disk
 
 	disk_info, err := disk.Usage("/")
 	if err != nil {
