@@ -9,7 +9,7 @@ import (
 
 // Raiz do comando
 
-var processCmd = &cobra.Command{
+var processesCmd = &cobra.Command{
 	Use: "processes",
 	Short: "Exibe informações de processos.",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -65,5 +65,5 @@ var processCmd = &cobra.Command{
 // Registro de subcomando
 
 func init() {
-	rootCmd.AddCommand(processCmd)
+	rootCmd.AddCommand(processesCmd)
 }
