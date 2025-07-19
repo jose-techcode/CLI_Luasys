@@ -26,11 +26,15 @@ var processesCmd = &cobra.Command{
 
 		for _, proc := range process_info {
 
+		// Usuário
+
 		user_info, err := proc.Username()
 		if err != nil {
 			fmt.Println("Error retrieving information about process.", err)
 			return
 		}
+
+		// Status
 
 		status_info, err := proc.Status()
 		if err != nil {
@@ -38,19 +42,27 @@ var processesCmd = &cobra.Command{
 			return
 		}
 
+		// Nome
+
 		name_info, err := proc.Name()
 		if err != nil {
 			fmt.Println("Error retrieving information about process.", err)
 			return
 		}
 
+		// PID
+
 		pid_info := proc.Pid
+
+		// CPU Percent
 
 		cpu_percent_1_info, err := proc.CPUPercent()
 		if err != nil {
 			fmt.Println("Error retrieving information about process.", err)
 			return
 		}
+
+		// RAM percent
 
 		ram_percent_1_info, err := proc.MemoryPercent()
 		if err != nil {
