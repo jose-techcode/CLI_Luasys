@@ -4,7 +4,7 @@ Pacote .deb da ferramenta Luasys.
 
 Para instalar, baixe o arquivo .deb e rode:
 
-- sudo dpkg -i luasys.deb
+- sudo dpkg -i luasys_1.0.1.deb
 
 Depois, execute:
 
