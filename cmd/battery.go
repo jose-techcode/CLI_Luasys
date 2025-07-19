@@ -26,6 +26,7 @@ var batteryCmd = &cobra.Command{
 		battery_text := strings.TrimSpace(string(battery_info))
 
 		fmt.Println(battery_text)
+		fmt.Println("")
 	},
 }
 

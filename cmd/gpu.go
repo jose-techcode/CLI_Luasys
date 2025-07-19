@@ -39,6 +39,7 @@ var gpuCmd = &cobra.Command{
 				}
 			}
 		}
+		fmt.Println("")
 	},
 }
 

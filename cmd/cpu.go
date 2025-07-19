@@ -12,7 +12,7 @@ var cpuCmd = &cobra.Command{
 	Short: "Exibe informações da CPU.",
 	Run: func(cmd *cobra.Command, args []string) {
 		
-		fmt.Println("-----CPU-----")
+		fmt.Printf("-----CPU-----\n")
 
 		// CPU (info)
 
@@ -43,6 +43,7 @@ var cpuCmd = &cobra.Command{
 		} else {
 			fmt.Println("Nothing found...")
 		}
+		fmt.Println("")
 	},
 }
 

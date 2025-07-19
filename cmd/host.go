@@ -29,6 +29,7 @@ var hostCmd = &cobra.Command{
 		fmt.Println("Kernel:", host_info.OS)
 	    fmt.Println("Kernel Version:", host_info.KernelVersion)
 		fmt.Println("Kernel Architecture:", host_info.KernelArch)
+		fmt.Println("")
 		fmt.Println("-----OPERATING SYSTEM-----")
         
 		// Operating System
@@ -36,6 +37,7 @@ var hostCmd = &cobra.Command{
 		fmt.Println("Hostname:", host_info.Hostname)
 		fmt.Println("Plataform:", host_info.Platform)
 		fmt.Println("Uptime (minutes):", host_info.Uptime / 60)
+		fmt.Println("")
 	},
 }
 

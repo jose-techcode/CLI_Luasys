@@ -32,7 +32,7 @@ var diskCmd = &cobra.Command{
 		fmt.Printf("Free Disk: %.2f GB\n", available_disk_GB)
 		fmt.Printf("Used Disk: %.2f GB\n", used_disk_GB)
 		fmt.Printf("Used Percent Disk: %.2f%%\n", disk_info.UsedPercent)
-		fmt.Println("-----PARTITIONS-----")
+		fmt.Printf("-----PARTITIONS-----\n")
 
 		// Disk (partitions)
 
@@ -45,6 +45,7 @@ var diskCmd = &cobra.Command{
 		for _, dp := range disk_partitions_info {
 			fmt.Printf("Device: %s  Mounted on: %s  Fstype: %s\n", dp.Device, dp.Mountpoint, dp.Fstype)
 		}
+		fmt.Println("")
 	},
 }
 

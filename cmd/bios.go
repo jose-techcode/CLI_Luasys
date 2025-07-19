@@ -50,6 +50,7 @@ var biosCmd = &cobra.Command{
 				}
 			}
 		}
+		fmt.Println("")
 	},
 }
 

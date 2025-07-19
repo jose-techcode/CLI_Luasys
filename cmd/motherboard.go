@@ -50,6 +50,7 @@ var motherboardCmd = &cobra.Command{
 				}
 			}
 		}
+		fmt.Println("")
 	},
 }
 

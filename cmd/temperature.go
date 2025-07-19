@@ -90,6 +90,7 @@ var tempCmd = &cobra.Command{
 				}
 			}
 		}
+		fmt.Println("")
 	},
 }
 

@@ -13,7 +13,7 @@ var usbCmd = &cobra.Command{
 	Short: "Exibe informações de dispositivos USB.",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("-----USB-----")
+		fmt.Printf("-----USB-----")
 
 		// USB
 
@@ -26,6 +26,7 @@ var usbCmd = &cobra.Command{
 		usb_text := strings.TrimSpace(string(usb_info))
 
 		fmt.Println(usb_text)
+		fmt.Println("")
 	},
 }
 

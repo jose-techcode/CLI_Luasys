@@ -71,6 +71,7 @@ var processesCmd = &cobra.Command{
 		}
 			fmt.Printf("User: %s  Status: %s  Name: %s  Pid: %d  CPU Percent: %.2f%%  RAM Percent: %.2f%%\n", user_info, status_info[0], name_info, pid_info, cpu_percent_1_info, ram_percent_1_info)
 		}
+		fmt.Println("")
 	},
 }
 
