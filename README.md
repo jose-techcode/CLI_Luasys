@@ -55,6 +55,7 @@ A "CLI Luasys" é uma CLI Tool de auditoria, diagnóstico e monitoramento de rec
 - Bibliotecas: Cobra
 - Ambiente: Linux
 - Versionamento de código: Git
+- Containerização: Docker
 - Outros: dmidecode, lspci, acpi, sensors e lsusb
 
 # 5. API
