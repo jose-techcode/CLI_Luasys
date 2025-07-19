@@ -304,7 +304,7 @@ func Runsys() string {
 
 	out.WriteString(fmt.Sprintf("Hostname: %s\n", host_info.Hostname))
 	out.WriteString(fmt.Sprintf("Platform: %s\n", host_info.Platform))
-	out.WriteString(fmt.Sprintf("Uptime (minutes): %d", host_info.Uptime/60))
+	out.WriteString(fmt.Sprintf("Uptime (minutes): %d\n", host_info.Uptime/60))
 
 	return out.String()
 }
@@ -313,7 +313,7 @@ func Runsys() string {
 
 var rootCmd = &cobra.Command{
 	Use: "luasys",
-	Short: "Uma CLI tool de auditoria, diagnóstico e monitoramento de recursos do hardware. Admin/Sudo.",
+	Short: "Uma CLI tool multifuncional de auditoria, diagnóstico e monitoramento de recursos do hardware. Admin/Sudo.",
 	Run: func(cmd *cobra.Command, args []string) {
 		info := Runsys()
 		fmt.Println(info)
