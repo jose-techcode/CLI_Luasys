@@ -1,4 +1,4 @@
-# Instalação
+# 1. Instalação
 
 Pacote .deb da ferramenta Luasys.
 
