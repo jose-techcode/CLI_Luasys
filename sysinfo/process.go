@@ -22,11 +22,15 @@ func GetPROCESSESInfo() string {
 
 	for _, proc := range process_info {
 
+		// Usuário
+
 		user_info, err := proc.Username()
 		if err != nil {
 			out.WriteString("Error retrieving information about processes: " + err.Error() + "\n")
 		return out.String()
 		}
+
+		// Status
 
 		status_info, err := proc.Status()
 		if err != nil {
@@ -34,19 +38,27 @@ func GetPROCESSESInfo() string {
 		return out.String()
 		}
 
+		// Nome
+
 		name_info, err := proc.Name()
 		if err != nil {
 			out.WriteString("Error retrieving information about processes: " + err.Error() + "\n")
 		return out.String()
 		}
 
+		// PID
+
 		pid_info := proc.Pid
+
+		// CPU Percent
 
 		cpu_percent_1_info, err := proc.CPUPercent()
 		if err != nil {
 			out.WriteString("Error retrieving information about processes: " + err.Error() + "\n")
 		return out.String()
 		}
+
+		// RAM Percent
 
 		ram_percent_1_info, err := proc.MemoryPercent()
 		if err != nil {
