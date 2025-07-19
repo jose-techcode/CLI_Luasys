@@ -4,6 +4,6 @@ Section: utils
 Priority: optional
 Architecture: amd64
 Maintainer: José walterandrade0001@gmail.com
-Description: Uma CLI tool de auditoria, diagnóstico e monitoramento de hardware
+Description: Uma CLI tool multifuncional de auditoria, diagnóstico e monitoramento de hardware
  Uma ferramenta de linha de comando para auditoria, diagnóstico e
  monitoramento de recursos do hardware. Admin/Sudo.
