@@ -302,7 +302,7 @@ func Runsys() string {
 
 	out.WriteString(fmt.Sprintf("Hostname: %s\n", host_info.Hostname))
 	out.WriteString(fmt.Sprintf("Platform: %s\n", host_info.Platform))
-	out.WriteString(fmt.Sprintf("Uptime (minutes): %d", host_info.Uptime/60))
+	out.WriteString(fmt.Sprintf("Uptime (minutes): %d\n", host_info.Uptime/60))
 
 	return out.String()
 }
