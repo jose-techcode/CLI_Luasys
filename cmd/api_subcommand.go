@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// API
+// API REST (GET)
 
 var apiCmd = &cobra.Command{
 	Use: "api",
