@@ -50,13 +50,13 @@ A "CLI Luasys" é uma CLI tool multifuncional de auditoria, diagnóstico e monit
 
 # 4. Tecnologias
 
-- Linguagem: Golang
-- Framework: Echo
-- Bibliotecas: Cobra
-- Ambiente: Linux
-- Versionamento de código: Git
-- Containerização: Docker
-- Outros: dmidecode, lspci, acpi, sensors e lsusb
+- Linguagem: Golang.
+- Framework: Echo.
+- Bibliotecas: Cobra.
+- Ambiente: Linux.
+- Versionamento de código: Git.
+- Containerização: Docker.
+- Outros: dmidecode, lspci, acpi, sensors e lsusb.
 
 # 5. API
 
