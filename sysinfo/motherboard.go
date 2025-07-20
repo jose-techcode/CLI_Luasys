@@ -19,7 +19,11 @@ func GetMOTHERBOARDInfo() string {
 		out.WriteString("Error retrieving information about Motherboard: " + err.Error() + "\n")
 		return out.String()
 	}
+    
 	info_lines := strings.Split(string(motherboard_info), "\n")
+	
+	// Iterate through a list to find the motherboard manufacturer
+
 	for _, line := range info_lines {
 		if strings.Contains(line, "Manufacturer") {
 			parts := strings.SplitN(line, ":", 2)
@@ -30,6 +34,9 @@ func GetMOTHERBOARDInfo() string {
 			}
 		}
 	}
+
+    // Iterate through a list to find the motherboard model
+
 	for _, line := range info_lines {
 		if strings.Contains(line, "Product Name") {
 			parts := strings.SplitN(line, ":", 2)

@@ -19,6 +19,9 @@ func GetGPUInfo() string {
 		out.WriteString("Error retrieving information about GPU: " + err.Error() + "\n")
 		return out.String()
 	}
+
+    // Iterate through a list to find the gpu
+
 	for _, line := range strings.Split(string(gpu_info), "\n") {
 		if strings.Contains(line, "VGA compatible controller") {
 			parts := strings.SplitN(line, ":", 2)

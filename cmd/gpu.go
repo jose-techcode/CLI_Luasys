@@ -27,7 +27,7 @@ var gpuCmd = &cobra.Command{
 
 	    lines := strings.Split(text, "\n")
 
-	    // Percorrer uma lista para encontrar a linha da GPU
+	    // Iterate through a list to find the gpu
 
 	    for _, line := range lines {
 		    if strings.Contains(line, "VGA compatible controller") {

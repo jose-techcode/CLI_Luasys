@@ -25,7 +25,7 @@ var biosCmd = &cobra.Command{
 
 		info_strings := strings.Split(info_list, "\n")
 
-		// Percorer uma lista para encontrar o vendor
+		// Iterate through a list to find the bios vendor
 
 		for _, info_string := range info_strings {
 			if strings.Contains(info_string, "Vendor") {
@@ -38,7 +38,7 @@ var biosCmd = &cobra.Command{
 			}
 		}
 
-        // Percorer uma lista para encontrar a versão
+        // Iterate through a list to find the bios version
 
 		for _, info_string := range info_strings {
 			if strings.Contains(info_string, "Version") {

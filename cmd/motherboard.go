@@ -25,7 +25,7 @@ var motherboardCmd = &cobra.Command{
 
 		info_lines := strings.Split(info_text, "\n")
 
-		// Percorrer uma lista para encontrar o manufacturer
+		// Iterate through a list to find the motherboard manufacturer
 
         for _, info_line := range info_lines {
 			if strings.Contains(info_line, "Manufacturer") {
@@ -38,7 +38,7 @@ var motherboardCmd = &cobra.Command{
 			}
 		}
 
-		// Percorer uma lista para encontrar a linha da placa-mãe e tirar a redundãncia "Product Name"
+		// Iterate through a list to find the motherboard model
 
 		for _, info_line := range info_lines {
 			if strings.Contains(info_line, "Product Name") {
