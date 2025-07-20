@@ -1,123 +1,123 @@
-# 1. Instalação
+# 1. Installation
 
-Pacote .deb da ferramenta Luasys.
+Luasys tool .deb package.
 
-Para instalar, baixe o arquivo .deb e rode:
+To install, download the .deb file and run:
 
-- sudo dpkg -i luasys_1.0.1.deb
+- sudo dpkg -i luasys_1.0.25.deb
 
-Depois, execute:
+Then, run:
 
 - luasys --help
 
-Observação:
+Note:
 
-Execute a CLI tool com permissão de administrador (sudo) para funcionar corretamente.
+Run the CLI tool with administrator permissions (sudo) for proper operation.
 
-# 2. CLI Luasys (admin/sudo)
+# 2. Luasys CLI (admin/sudo)
 
-A "CLI Luasys" é uma CLI tool multifuncional de auditoria, diagnóstico e monitoramento de recursos do hardware, como cpu, memória, placa-mãe, bios, memória, disco e partições, bateria, temperatura, usb, host (kernel e sistema operacional), net (rede) e processes (processos). Precisa de permissão de administrador ou sudo para executar a CLI Luasys. Ao clonar o repositório, você terá controle de uma API REST local.
+The "Luasys CLI" is a multifunctional CLI tool for auditing, diagnosing, and monitoring hardware resources, such as CPU, memory, motherboard, BIOS, memory, disk and partitions, battery, temperature, USB, host (kernel and operating system), net (network), and processes. You need administrator or sudo permission to run the Luasys CLI. By cloning the repository, you will have control of a local REST API.
 
-# 3. Funcionalidades
+# 3. Features
 
-- luasys - Exibe informações gerais, com exceção de net e process.
+- luasys - Displays general information, excluding net and process.
 
-- api - Inicia servidor HTTP da API. Localhost.
+- api - Starts the API HTTP server. Localhost.
 
-- cpu - Exibe informações da CPU.
+- cpu - Displays CPU information.
 
-- gpu - Exibe informações da GPU.
+- gpu - Displays GPU information.
 
-- motherboard - Exibe informações da placa-mãe.
+- motherboard - Displays motherboard information.
 
-- bios - Exibe informações da BIOS.
+- bios - Displays BIOS information.
 
-- mem - Exibe informações da memória.
+- mem - Displays memory information.
 
-- disk - Exibe informações do disco.
+- disk - Displays disk information.
 
-- battery - Exibe informações da bateria.
+- battery - Displays battery information.
 
-- temp - Exibe informações da temperatura.
+- temp - Displays temperature information.
 
-- usb - Exibe informações de dispositivos USB.
+- usb - Displays USB device information.
 
-- host - Exibe informações do kernel e do sistema operacional.
+- host - Displays kernel and operating system information.
 
-- net - Exibe informações da rede.
+- net - Displays network information.
 
-- processes - Exibe informações de processos.
+- processes - Displays process information.
 
-# 4. Tecnologias
+# 4. Technologies
 
-- Linguagem: Golang.
+- Language: Golang.
 - Framework: Echo.
-- Bibliotecas: Cobra.
-- Ambiente: Linux.
-- Versionamento de código: Git.
-- Containerização: Docker.
-- Outros: dmidecode, lspci, acpi, sensors e lsusb.
+- Libraries: Cobra.
+- Environment: Linux. 
+- Code versioning: Git.
+- Containerization: Docker.
+- Others: dmidecode, lspci, acpi, sensors, and lsusb.
 
 # 5. API
 
-- GET: Exibe informações da auditoria, diagnóstico e monitoramento via servidor HTTP por API.
+- GET: Displays auditing, diagnostic, and monitoring information via an HTTP server via API.
 
-- / - Rota geral.
+- / - General path.
 
-- /cpu - Rota da CPU.
+- /cpu - CPU path.
 
-- /gpu - Rota da GPU.
+- /gpu - GPU path.
 
-- /motherboard - Rota da placa-mãe.
+- /motherboard - Motherboard path.
 
-- /bios - Rota da BIOS.
+- /bios - BIOS path.
 
-- /mem - Rota da memória.
+- /mem - Memory path.
 
-- /disk - Rota do disco.
+- /disk - Disk path.
 
-- /battery - Rota da bateria.
+- /battery - Battery path.
 
-- /temperature - Rota da temperature.
+- /temperature - Temperature path.
 
-- /usb - Rota de dispositivos USB.
+- /usb - USB device path.
 
-- /host - Rota do kernel e do sistema operacional.
+- /host - Kernel and operating system path.
 
-- /net - Rota da rede.
+- /net - Network path.
 
-- /processes - Rota de processos.
+- /processes - Process path.
 
-# 6. Clone do Repositório
+# 6. Clone the Repository
 
 - Bash
 
 git clone github.com/jose-techcode/CLI_Luasys
 
-# 7. Pasta do Projeto
+# 7. Project Folder
 
 - Bash
 
 cd CLI_Luasys
 
-# 8. Rodar em Docker
+# 8. Run in Docker
 
-- Build da imagem
+- Build the image
 
-docker build -t luasys:latest.
+docker build -t luasys:latest .
 
-- Rodar a imagem
+- Run the image
 
 docker run --rm luasys:latest
 
-- Rodar a imagem com privilégio (recomendado)
+- Run the image with privileges (recommended)
 
-docker run --rm --privileged luasys:latest (opcional: < subcomando >)
+docker run --rm --privileged luasys:latest (optional: < subcommand >)
 
-# 9. Contribuição
+# 9. Contribute
 
-Sinta-se livre para abrir Issues ou enviar Pull Requests.
+Feel free to open Issues or submit Pull Requests.
 
-# 10. Licença
+# 10. License
 
-Este projeto está licenciado sob a licença GPL.
+This project is licensed under the GPL.
