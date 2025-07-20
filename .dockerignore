@@ -4,7 +4,7 @@
 .idea/
 *.swp
 
-# System files
+# Files System
 
 .DS_Store
 Thumbs.db
