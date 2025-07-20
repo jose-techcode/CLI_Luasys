@@ -1,25 +1,25 @@
-# Binário
+# Binary
 
 luasys
 *.exe
 *.out
 
-# Configurações de IDEs/Editores
+# IDE/Editor Settings
 
 .vscode/
 .idea/
 *.swp
 
-# Arquivos de sistema
+# File Systems
 
 .DS_Store
 Thumbs.db
 
-# Arquivos ocultos de backup
+# Hidden files of backup
 
 *~
 
-# Outros
+# Others
 
 *.log
 *.bak
