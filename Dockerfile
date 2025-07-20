@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
-# Atualiza e instala todos os utilitários necessários da CLI tool Luasys
+# Update and install every utility of CLI tool Luasys
+
 RUN apt update && apt install -y \
     dmidecode \
     pciutils \
@@ -9,9 +10,11 @@ RUN apt update && apt install -y \
     usbutils \
     && apt clean
 
-# Copia o binário
+# Copy the binary
+
 COPY luasys /usr/local/bin/luasys
 RUN chmod +x /usr/local/bin/luasys
 
-# Comando do binário
+# Command of binary
+
 ENTRYPOINT ["/usr/local/bin/luasys"]

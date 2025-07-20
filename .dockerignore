@@ -1,19 +1,19 @@
-# Configurações de IDEs/Editores
+# IDE/Editor Settings
 
 .vscode/
 .idea/
 *.swp
 
-# Arquivos de sistema
+# System files
 
 .DS_Store
 Thumbs.db
 
-# Arquivos ocultos de backup
+# Hidden files of backup
 
 *~
 
-# Outros
+# Others
 
 *.log
 *.bak
@@ -24,12 +24,12 @@ Thumbs.db
 .git/
 .gitignore
 
-# Arquivos Docker
+# Docker files
 
 Dockerfile
 .dockerignore
 
-# Outros
+# Markdown
 
 *.md
 LICENSE
