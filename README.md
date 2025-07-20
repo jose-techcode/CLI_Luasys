@@ -16,7 +16,7 @@ Run the CLI tool with administrator permissions (sudo) for proper operation.
 
 # 2. Luasys CLI (admin/sudo)
 
-The "Luasys CLI" is a multifunctional CLI tool for auditing, diagnosing, and monitoring hardware resources, such as CPU, memory, motherboard, BIOS, memory, disk and partitions, battery, temperature, USB, host (kernel and operating system), net (network), and processes. You need administrator or sudo permission to run the Luasys CLI. By cloning the repository, you will have control of a local REST API.
+The "Luasys CLI" is a multifunctional CLI tool for auditing, diagnosing, and monitoring hardware resources, such as CPU, memory, motherboard, BIOS, memory, disk and partitions, battery, temperature, USB, host (kernel and operating system), net (network), and processes. You need administrator or sudo permission to run the Luasys CLI. By cloning the repository, you will have control of a local REST GET API.
 
 # 3. Features
 
