@@ -12,7 +12,7 @@ func Server() {
 
     // GET
 
-    // All
+    // Todas
 
     e.GET("/", func(c echo.Context) error {
         informations := sysinfo.Runsys()
