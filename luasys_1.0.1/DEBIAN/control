@@ -1,8 +1,0 @@
-Package: luasys
-Version: 1.0.1
-Section: utils
-Priority: optional
-Architecture: amd64
-Maintainer: José <walterandrade0001@gmail.com>
-Description: CLI tool multifuncional de auditoria, diagnóstico e monitoramento do hardware.
- Esta CLI tool exige admin/sudo.
