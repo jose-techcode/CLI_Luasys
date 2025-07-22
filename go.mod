@@ -8,10 +8,11 @@ require github.com/spf13/cobra v1.9.1 // direct
 
 require github.com/shirou/gopsutil/v3 v3.24.5 // direct
 
+require github.com/labstack/echo/v4 v4.13.4
+
 require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/labstack/echo/v4 v4.13.4 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
