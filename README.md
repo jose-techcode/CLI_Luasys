@@ -10,7 +10,7 @@ Then, run:
 
 - luasys --help
 
-Note:
+**Note:**
 
 Run the CLI tool with administrator permissions (sudo) for proper operation.
 
@@ -113,6 +113,10 @@ docker run --rm luasys:latest
 - Run the image with privileges (recommended)
 
 docker run --rm --privileged luasys:latest (optional: < subcommand >)
+
+**Note:**
+
+The api subcommand does not work inside Docker.
 
 # 9. Contribute
 
