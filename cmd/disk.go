@@ -43,7 +43,7 @@ var diskCmd = &cobra.Command{
 		}
 
 		for _, dp := range disk_partitions_info {
-			fmt.Printf("Device: %s  Mounted on: %s  Fstype: %s\n", dp.Device, dp.Mountpoint, dp.Fstype)
+			fmt.Printf("Device: %s  Mounted on: %s\n", dp.Device, dp.Mountpoint)
 		}
 		fmt.Println("")
 	},
