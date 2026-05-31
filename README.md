@@ -59,7 +59,7 @@ The SysAdmin Tool is an CLI tool for auditing, diagnosing, and monitoring hardwa
 
 - Bash
 
-`git clone https://github.com/jose-techcode/SysAdmin-Tool`
+`git clone https://github.com/josewalter01/SysAdmin-Tool`
 
 # 6. Project Folder
 
