@@ -20,7 +20,7 @@ Run the CLI tool with administrator permissions (sudo) for proper operation.
 
 # 2. SysAdmin Tool
 
-The SysAdmin Tool is an CLI tool for auditing, diagnosing, and monitoring hardware resources, such as CPU, GPU, motherboard, BIOS, memory, disk and partitions, USB devices, host (kernel and operating system), net (network), and processes. Net and processes do not appear in the general command, they only work in subcommands. You need administrator or sudo permission to run the CLI tool.
+[DEPRECATED] The SysAdmin Tool is an CLI tool for auditing, diagnosing, and monitoring hardware resources, such as CPU, GPU, motherboard, BIOS, memory, disk and partitions, USB devices, host (kernel and operating system), net (network), and processes. Net and processes do not appear in the general command, they only work in subcommands. You need administrator or sudo permission to run the CLI tool.
 
 # 3. Features
 
